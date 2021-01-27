@@ -3,24 +3,71 @@ package main
 import (
   "fmt"
   "log"
-	"os"
+  "sort"
   "net/http"
 	"github.com/olekukonko/tablewriter"
+	"github.com/prometheus/client_golang/prometheus"
+//  "html/template"
 )
 
+var (
+	cpuTemp = prometheus.NewGauge(prometheus.GaugeOpts{
+		Name: "cpu_temperature_celsius",
+		Help: "Current temperature of the CPU.",
+	})
+	httpReqCounters = prometheus.NewCounter(prometheus.CounterOpts{
+		Name: "webapp_counter",
+		Help: "Root endpoint total http requests counter.",
+	})
+)
+
+func init() {
+	// Metrics have to be registered to be exposed:
+	prometheus.MustRegister(cpuTemp)
+	prometheus.MustRegister(httpReqCounters)
+}
+
+
 func main() {
-  http.HandleFunc("/", handlerTable)
-  http.HandleFunc("/raw", handler)
-  http.HandleFunc("/temp", handlerTemp)
+  cpuTemp.Set(69.3)
+
+  http.HandleFunc("/", handlerTemp)
+  http.HandleFunc("/raw", handlerRaw)
   log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
-type requestHeaders struct {
-  Name  []string
-  Value []string
+func handlerTemp(w http.ResponseWriter, r *http.Request) {
+  var request [][]string
+  keys := make([]string, 0, len(r.Header))
+  
+  table := tablewriter.NewWriter(w)
+	table.SetHeader([]string{"Name", "Values"})
+
+  for k := range r.Header {
+	  keys = append(keys, k)
+	}
+
+  sort.Strings(keys)
+
+  // convert value from map to string
+  // r.Header disamble from multidimensional string array to string array 
+  for _, key := range keys {
+  // Resamble string array to multidimensional string array
+    for _, value := range r.Header[key] {
+      request = append(request, []string{key, value})
+	    //fmt.Println(key, r.Header[key])
+    }
+  }
+
+  for _, v := range request {
+	    table.Append(v)
+	}
+	table.Render()
+  // fmt.Fprintf(w, "%s", table.Render()
+  httpReqCounters.Inc()
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func handlerRaw(w http.ResponseWriter, r *http.Request) {
   fmt.Fprintf(w, "%s %s %s \n", r.Method, r.URL, r.Proto)
   //Iterate over all header fields
   for k, v := range r.Header {
@@ -30,40 +77,4 @@ func handler(w http.ResponseWriter, r *http.Request) {
   fmt.Fprintf(w, "RemoteAddr= %q\n", r.RemoteAddr)
   //Get value for a specified token
   fmt.Fprintf(w, "\n\nFinding value of \"Accept\" %q", r.Header["Accept"])
-}
-
-func handlerTable(w http.ResponseWriter, r *http.Request) {
-	data := [][]string{
-    []string{"A", "The Good", "500"},
-    []string{"B", "The Very very Bad Man", "288"},
-    []string{"C", "The Ugly", "120"},
-    []string{"D", "The Gopher", "800"},
-	}
-
-	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Name", "Sign", "Rating"})
-
-	for _, v := range data {
-	    table.Append(v)
-	}
-	table.Render() // Send output
-
-}
-
-func handlerTemp(w http.ResponseWriter, r *http.Request) {
-  var request [][]string
-  table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Name", "Values"})
-
-  for k, v := range r.Header {
-    for _, value := range v {
-        request = append(request,[]string{k, value})
-    }
-  }
-
-  for _, v := range request {
-	    table.Append(v)
-	}
-	table.Render()
-
 }
