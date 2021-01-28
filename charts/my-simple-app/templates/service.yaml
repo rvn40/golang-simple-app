@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: my-simple-app
+    app.kubernetes.io/managed-by: Helm
+  name: my-simple-app
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: my-simple-app
+status:
+  loadBalancer: {}
