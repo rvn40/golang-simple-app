@@ -11,8 +11,12 @@ deployment:
           tag: ":latest"
 
 service:
-  name: my-simple-app
-  labels:
-    app: my-simple-app
-  port:
-    value: 8080
+  metadata:
+    name: my-simple-app
+    labels:
+      app: my-simple-app-svc
+  spec:
+    type: NodePort
+    ports:
+      port:
+        value: 8080

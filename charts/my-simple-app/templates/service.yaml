@@ -3,15 +3,16 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: {{ .Values.service.name }}
+    app: {{ .Values.service.metadata.labels.app }}
     app.kubernetes.io/managed-by: Helm
-  name: {{ .Values.service.name }}
+  name: {{ .Values.service.metadata.name }}
 spec:
+  type: {{ .Values.service.spec.type }}
   ports:
-  - port: {{ .Values.service.port.value }}
+  - port: {{ .Values.service.spec.ports.port.value }}
     protocol: TCP
-    targetPort: {{ .Values.service.port.value }}
+    targetPort: {{ .Values.service.spec.ports.port.value }}
   selector:
-    app: {{ .Values.service.name }}
+    app: {{ .Values.service.metadata.labels.app }}
 status:
   loadBalancer: {}
