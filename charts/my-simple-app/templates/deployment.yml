@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: my-simple-app
+  name: my-simple-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-simple-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: my-simple-app
+    spec:
+      containers:
+      - image: kebonce40/golang-simple-app:latest
+        name: golang-simple-app
+        resources: {}
+status: {}
