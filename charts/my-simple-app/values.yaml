@@ -1,0 +1,18 @@
+deployment:
+  name: my-simple-app
+  labels:
+    app: my-simple-app
+  spec:
+    template:
+      spec:
+        containers:
+          registry: "kebonce40/"
+          image_name: "golang-simple-app"
+          tag: ":latest"
+
+service:
+  name: my-simple-app
+  labels:
+    app: my-simple-app
+  port:
+    value: 8080

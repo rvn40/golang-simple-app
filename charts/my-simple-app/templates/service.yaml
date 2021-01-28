@@ -3,15 +3,15 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: my-simple-app
+    app: {{ .Values.service.name }}
     app.kubernetes.io/managed-by: Helm
-  name: my-simple-app
+  name: {{ .Values.service.name }}
 spec:
   ports:
-  - port: 8080
+  - port: {{ .Values.service.port.value }}
     protocol: TCP
-    targetPort: 8080
+    targetPort: {{ .Values.service.port.value }}
   selector:
-    app: my-simple-app
+    app: {{ .Values.service.name }}
 status:
   loadBalancer: {}

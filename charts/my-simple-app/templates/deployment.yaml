@@ -3,22 +3,22 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: my-simple-app
-  name: my-simple-app
+    app: {{ .Values.deployment.labels.app }}
+  name: {{ .Values.deployment.name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-simple-app
+      app: {{ .Values.deployment.labels.app }}
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: my-simple-app
+        app: {{ .Values.deployment.labels.app }}
     spec:
       containers:
-      - image: kebonce40/golang-simple-app:latest
-        name: golang-simple-app
+      - image: {{ .Values.deployment.spec.template.spec.containers.registry}}{{ .Values.deployment.spec.template.spec.containers.image_name}}{{ .Values.deployment.spec.template.spec.containers.tag}}
+        name: {{ .Values.deployment.spec.template.spec.containers.image_name}}
         resources: {}
 status: {}
