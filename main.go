@@ -33,7 +33,7 @@ func main() {
 
   http.HandleFunc("/", handlerTemp)
   http.HandleFunc("/raw", handlerRaw)
-  log.Fatal(http.ListenAndServe("localhost:8000", nil))
+  log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
 }
 
 func handlerTemp(w http.ResponseWriter, r *http.Request) {
