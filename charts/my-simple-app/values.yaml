@@ -10,8 +10,8 @@ deployment:
             image_name: "golang-simple-app"
             tag: ":latest"
           - registry: "kebonce40/"
-            image_name: "golang-simple-app"
-            tag: ":printheaderpromlatest"
+            image_name: "golang-simple-app-sidecar"
+            tag: ":printHeaderPromLatest"
 
 service:
   metadata:
