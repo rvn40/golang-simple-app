@@ -12,7 +12,7 @@ deployment:
             tag: "latest"
           - registry: "kebonce40/"
             image_name: "golang-simple-app"
-            name: "my-simple-app-sidecar"
+            name: "prometheus-sidecar"
             tag: "printHeaderPromLatest"
 
 service:
