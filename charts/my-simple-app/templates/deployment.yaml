@@ -18,10 +18,9 @@ spec:
         app: {{ .Values.deployment.labels.app }}
     spec:
       containers:
-      - image: {{ .Values.deployment.spec.template.spec.containers[0].registry}}{{ .Values.deployment.spec.template.spec.containers[0].image_name}}{{ .Values.deployment.spec.template.spec.containers[0].tag}}
-        name: {{ .Values.deployment.spec.template.spec.containers[0].image_name}}
+      {{- range .Values.deployment.spec.template.spec.containers}}
+      - image: {{ .registry}}{{ .image_name}}{{ .tag}}
+        name: {{ .image_name}}
         resources: {}
-      - image: {{ .Values.deployment.spec.template.spec.containers[1].registry}}{{ .Values.deployment.spec.template.spec.containers[1].image_name}}{{ .Values.deployment.spec.template.spec.containers[1].tag}}
-        name: {{ .Values.deployment.spec.template.spec.containers[1].image_name}}
-        resources: {}
+      {{- end }}
 status: {}

@@ -9,12 +9,11 @@ metadata:
 spec:
   type: {{ .Values.service.spec.type }}
   ports:
-  - port: {{ .Values.service.spec.ports[0].port }}
+  {{ - range .Values.service.spec.ports }}
+  - port: {{ .port }}
     protocol: TCP
-    targetPort: {{ .Values.service.spec.ports[0].port }}
-  - port: {{ .Values.service.spec.ports[1].port }}
-    protocol: TCP
-    targetPort: {{ .Values.service.spec.ports[1].port }}
+    targetPort: {{ .port }}
+  {{ - end }}
   selector:
     app: {{ .Values.service.metadata.labels.app }}
 status:
