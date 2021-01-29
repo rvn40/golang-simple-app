@@ -31,7 +31,7 @@ for delete this app from your kubernetes cluster just run this command:
 
 To accessing the app open your browser or use some net tools like "curl" and go to your public_IP:port number and you will get http response like shown below
 
-> Notes: Since this app use nodePort type in kubernetes service. The port number to accessing this app is under "30808" and for prometheus client http counter is under "30911. It's happen because kubernetes standard ports range for service with type NodePort are 30000-32767. Do not forget to allow those ports in your firewall system.
+> Notes: Since this app use nodePort type in its kubernetes service. The port number to accessing this app is under "30808" and for prometheus client http counter is under "30911. It's happen because kubernetes standard ports range for service with type NodePort are 30000-32767. Do not forget to allow those ports in your firewall system.
 
 ### main_app
 
@@ -40,3 +40,7 @@ To accessing the app open your browser or use some net tools like "curl" and go 
 ### prometheus_counter
 
 ![vars](files/images/r2.PNG)
+
+### All Cluster resources
+
+![vars](files/images/r3.PNG)
