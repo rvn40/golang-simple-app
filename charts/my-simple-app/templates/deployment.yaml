@@ -20,7 +20,7 @@ spec:
       containers:
       {{- range .Values.deployment.spec.template.spec.containers}}
       - image: {{ .registry}}{{ .image_name}}":"{{ .tag}}
-        name: {{ .image_name}}{{ .tag}}
+        name: {{ .name}}
         resources: {}
       {{- end }}
 status: {}
