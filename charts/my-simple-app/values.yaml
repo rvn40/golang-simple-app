@@ -9,11 +9,11 @@ deployment:
           - registry: "kebonce40/"
             image_name: "golang-simple-app"
             name: "my-simple-app"
-            tag: "latest"
+            tag: ":latest"
           - registry: "kebonce40/"
             image_name: "golang-simple-app"
             name: "prometheus-sidecar"
-            tag: "printHeaderPromLatest"
+            tag: ":printHeaderPromLatest"
 
 service:
   metadata:
