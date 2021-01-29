@@ -7,16 +7,15 @@ metadata:
     app.kubernetes.io/managed-by: Helm
   name: {{ .Values.service.metadata.name }}
 spec:
-  type: {{ .Values.service.spec.type }}
   ports:
   {{- range .Values.service.spec.ports }}
   - name: {{ .name }}
-    nodePort: {{ .nodeport }}
     port: {{ .port }}
     protocol: TCP
     targetPort: {{ .port }}
   {{- end }}
   selector:
     app: {{ .Values.service.metadata.labels.app }}
+  type: {{ .Values.service.spec.type }}
 status:
   loadBalancer: {}
