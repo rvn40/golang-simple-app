@@ -13,7 +13,9 @@ spec:
     port: {{ .port }}
     protocol: TCP
     targetPort: {{ .port }}
-  {{- end }}
+  {{- end }}  
+  externalIPs:
+    - 35.212.161.146
   selector:
     app: {{ .Values.service.metadata.labels.app }}
   type: {{ .Values.service.spec.type }}
