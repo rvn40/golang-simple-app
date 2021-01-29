@@ -18,7 +18,10 @@ spec:
         app: {{ .Values.deployment.labels.app }}
     spec:
       containers:
-      - image: {{ .Values.deployment.spec.template.spec.containers.registry}}{{ .Values.deployment.spec.template.spec.containers.image_name}}{{ .Values.deployment.spec.template.spec.containers.tag}}
-        name: {{ .Values.deployment.spec.template.spec.containers.image_name}}
+      - image: {{ .Values.deployment.spec.template.spec.containers.registry[0]}}{{ .Values.deployment.spec.template.spec.containers.image_name[0]}}{{ .Values.deployment.spec.template.spec.containers.tag[0]}}
+        name: {{ .Values.deployment.spec.template.spec.containers.image_name[0]}}
+        resources: {}
+      - image: {{ .Values.deployment.spec.template.spec.containers.registry[1]}}{{ .Values.deployment.spec.template.spec.containers.image_name[1]}}{{ .Values.deployment.spec.template.spec.containers.tag[1]}}
+        name: {{ .Values.deployment.spec.template.spec.containers.image_name[1]}}
         resources: {}
 status: {}

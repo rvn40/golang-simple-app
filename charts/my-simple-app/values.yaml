@@ -6,9 +6,12 @@ deployment:
     template:
       spec:
         containers:
-          registry: "kebonce40/"
-          image_name: "golang-simple-app"
-          tag: ":latest"
+          - registry: "kebonce40/"
+            image_name: "golang-simple-app"
+            tag: ":latest"
+          - registry: "kebonce40/"
+            image_name: "golang-simple-app"
+            tag: ":printHeaderProm_latest"
 
 service:
   metadata:
@@ -18,5 +21,5 @@ service:
   spec:
     type: NodePort
     ports:
-      port:
-        value: 8080
+      - port: 8080
+      - port: 9110
