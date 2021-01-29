@@ -19,12 +19,8 @@ spec:
     spec:
       containers:
       {{- range .Values.deployment.spec.template.spec.containers}}
-      - image: {{ .registry}}{{ .image_name}}{{ .tag}}
-        {{- if eq .tag ":printHeaderPromLatest" -}}
+      - image: {{ .registry}}{{ .image_name}}":"{{ .tag}}
         name: {{ .image_name}}
-        {{- else -}}
-        name: {{ .image_name}}-sidecar
-        {{- end -}}
         resources: {}
       {{- end }}
 status: {}

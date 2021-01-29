@@ -8,10 +8,10 @@ deployment:
         containers:
           - registry: "kebonce40/"
             image_name: "golang-simple-app"
-            tag: ":latest"
+            tag: "latest"
           - registry: "kebonce40/"
             image_name: "golang-simple-app"
-            tag: ":printHeaderPromLatest"
+            tag: "printHeaderPromLatest"
 
 service:
   metadata:
