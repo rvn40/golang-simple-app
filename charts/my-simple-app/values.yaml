@@ -21,7 +21,7 @@ service:
     labels:
       app: my-simple-app  # Should be same as deployment.labels.app
   spec:
-    type: LoadBalancer
+    type: NodePort
     ports:
       - name: msa-port
         nodeport: 30808
