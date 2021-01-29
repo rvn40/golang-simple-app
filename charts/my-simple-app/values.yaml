@@ -21,5 +21,7 @@ service:
   spec:
     type: NodePort
     ports:
-      - port: 8080
-      - port: 9110
+      - name: msa-port
+        port: 8080
+      - name: msa-prom-port
+        port: 9110
