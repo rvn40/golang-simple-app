@@ -6,11 +6,11 @@ deployment:
     template:
       spec:
         containers:
-          - registry: "kebonce40/"
+          - registry: "docker.io/kebonce40/"
             image_name: "golang-simple-app"
             name: "my-simple-app"
             tag: ":latest"
-          - registry: "kebonce40/"
+          - registry: "docker.io/kebonce40/"
             image_name: "golang-simple-app"
             name: "prometheus-sidecar"
             tag: ":printHeaderPromLatest"
