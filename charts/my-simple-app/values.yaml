@@ -24,6 +24,8 @@ service:
     type: NodePort
     ports:
       - name: msa-port
+        nodeport: 30808
         port: 8080
       - name: msa-prom-port
+        nodeport: 30911
         port: 9110
