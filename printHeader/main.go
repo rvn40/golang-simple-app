@@ -7,7 +7,6 @@ import (
   "net/http"
 	"github.com/olekukonko/tablewriter"
 	"github.com/prometheus/client_golang/prometheus"
-//  "html/template"
 )
 
 var (
@@ -55,7 +54,6 @@ func handlerTemp(w http.ResponseWriter, r *http.Request) {
   // Resamble string array to multidimensional string array
     for _, value := range r.Header[key] {
       request = append(request, []string{key, value})
-	    //fmt.Println(key, r.Header[key])
     }
   }
 
@@ -63,7 +61,7 @@ func handlerTemp(w http.ResponseWriter, r *http.Request) {
 	    table.Append(v)
 	}
 	table.Render()
-  // fmt.Fprintf(w, "%s", table.Render()
+
   httpReqCounters.Inc()
 }
 

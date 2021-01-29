@@ -1,7 +1,7 @@
 deployment:
   name: my-simple-app
   labels:
-    app: my-simple-app
+    app: my-simple-app # Should be same as service.metadata.labels.app
   spec:
     template:
       spec:
@@ -14,7 +14,7 @@ service:
   metadata:
     name: my-simple-app-svc
     labels:
-      app: my-simple-app
+      app: my-simple-app  # Should be same as deployment.labels.app
   spec:
     type: NodePort
     ports:

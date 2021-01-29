@@ -9,12 +9,12 @@ RUN apk update && apk add --no-cache git openssh-client gcc g++ mercurial \
 
 RUN go get github.com/olekukonko/tablewriter && go get github.com/prometheus/client_golang/prometheus
 
-RUN go build -o main .
-
+RUN go build -o /golang-simple-app/printHeader/main ./printHeader 
 
 FROM alpine:3.12
 
-COPY --from=builder /golang-simple-app/main /golang-simple-app/main
+COPY --from=builder /golang-simple-app/printHeader/main /golang-simple-app/printHeader/main
 
-EXPOSE 8080
-CMD ./golang-simple-app/main 
+EXPOSE 8080 
+
+CMD ./golang-simple-app/printHeader/main 
