@@ -12,9 +12,9 @@ deployment:
 
 service:
   metadata:
-    name: my-simple-app
+    name: my-simple-app-svc
     labels:
-      app: my-simple-app-svc
+      app: my-simple-app
   spec:
     type: NodePort
     ports:
